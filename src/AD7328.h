@@ -10,11 +10,7 @@
 // ----------------------------------------------------------------------------
 #ifndef AD7328_H
 #define AD7328_H
-#if defined(ARDUINO) && ARDUINO >= 100
-#include "Arduino.h"
-#else
-#include "WProgram.h"
-#endif
+#include <Arduino.h>
 #include <SPI.h>
 #include <util/atomic.h>
 
@@ -27,7 +23,7 @@ public:
   uint8_t getRange(uint8_t channel);
   uint16_t read(uint8_t channel);
 
-// range constants
+  // range constants
 #define BIP10  0x00 // +/-10V
 #define BIP5   0x01 // +/-5V
 #define BIP2V5 0x02 // +/-2.5
