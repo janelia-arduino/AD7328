@@ -19,7 +19,8 @@ class AD7328
 {
 public:
   AD7328(uint8_t cs_pin);
-  void setRange(uint8_t channel, uint8_t range);
+  void setRange(uint8_t channel,
+    uint8_t range);
   uint8_t getRange(uint8_t channel);
   uint16_t read(uint8_t channel);
 

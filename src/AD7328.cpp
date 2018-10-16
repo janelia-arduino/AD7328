@@ -14,13 +14,14 @@
 AD7328::AD7328(uint8_t cs_pin) :
 cs_pin_(cs_pin)
 {
-  pinMode(cs_pin_, OUTPUT);
-  digitalWrite(cs_pin_, HIGH);
+  pinMode(cs_pin_,OUTPUT);
+  digitalWrite(cs_pin_,HIGH);
   range_l_ = 0xa000;
   range_h_ = 0xc000;
 }
 
-void AD7328::setRange( uint8_t ch, uint8_t range)
+void AD7328::setRange( uint8_t ch,
+  uint8_t range)
 {
   switch (ch)
   {
@@ -62,7 +63,7 @@ void AD7328::setRange( uint8_t ch, uint8_t range)
   ATOMIC_BLOCK(ATOMIC_RESTORESTATE)
   {
     SPI.setDataMode(SPI_MODE2);  // set proper mode, clk idle hi, edeg = 0 => mode = 2
-    digitalWrite(cs_pin_, LOW);
+    digitalWrite(cs_pin_,LOW);
     if( ch < 4 )
     {
       SPI.transfer( range_l_ >> 8);
@@ -73,7 +74,7 @@ void AD7328::setRange( uint8_t ch, uint8_t range)
       SPI.transfer( range_h_ >> 8);
       SPI.transfer( range_h_ & 0xff);
     }
-    digitalWrite(cs_pin_, HIGH);
+    digitalWrite(cs_pin_,HIGH);
 
   }
 }
@@ -122,18 +123,18 @@ uint16_t AD7328::read(uint8_t adc) //, uint8_t coding)
     adc--;  // convert ADC1-8 to 0-7
     // first transaction - select the channel by writing to the control register
     SPI.setDataMode(SPI_MODE2);  // set proper mode, clk idle hi, edeg = 0 => mode = 2
-    digitalWrite(cs_pin_, LOW);
+    digitalWrite(cs_pin_,LOW);
     setup = 0b1000000000010000;  // write to control, single ended, normal mode, int ref, 2's comp
     setup |= ((adc & 0x07) << 10); // get adc reg number to right place and add it in
     adc_value = (SPI.transfer(setup >> 8)) << 8;
     adc_value |= SPI.transfer(setup & 0xff);
-    digitalWrite(cs_pin_, HIGH);
+    digitalWrite(cs_pin_,HIGH);
 
     // second transaction - read the analog value
-    //      digitalWrite(cs_pin_, LOW);
+    //      digitalWrite(cs_pin_,LOW);
     //      adc_value = SPI.transfer(0) << 8;
     //      adc_value |= SPI.transfer(0);
-    //      digitalWrite(cs_pin_, HIGH);
+    //      digitalWrite(cs_pin_,HIGH);
 
     // sign-extend if negative
     //  if ((coding == 0) && ((adc_value & 0x1000) == 0x1000)) {
