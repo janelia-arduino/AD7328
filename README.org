@@ -16,6 +16,3 @@
 
   [[./examples]]
 
-* Library Dependencies
-
-  [[https://github.com/janelia-arduino/arduino-libraries][arduino-libraries]]
