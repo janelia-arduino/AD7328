@@ -6,7 +6,7 @@
 //
 // Authors:
 // Steve Sawtelle sawtelles@janelia.hhmi.org
-// Peter Polidoro peterpolidoro@gmail.com
+// Peter Polidoro peter@polidoro.io
 // ----------------------------------------------------------------------------
 #include "AD7328.h"
 
